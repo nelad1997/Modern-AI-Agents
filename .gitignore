@@ -4,6 +4,9 @@
 .env.*
 *.env
 
+# Assignment spec PDF contains a live API key on page 8 — never commit it
+RAG Assignment/Individual RAG Assignment.pdf
+
 # === Claude Code internal ===
 .claude/
 

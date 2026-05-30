@@ -1,0 +1,3 @@
+# Keep data/binary files byte-for-byte (no line-ending conversion)
+*.csv -text
+*.pdf binary
