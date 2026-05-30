@@ -3,7 +3,7 @@
 A Retrieval-Augmented Generation (RAG) application built with Python/FastAPI, LangChain, Pinecone, and deployed on Vercel.
 
 **🌐 Live agent:** https://my-rag-app-eight.vercel.app
-**📖 Full agent docs** (usage examples, parameters, optimization/testing writeup): [`RAG Assignment/my-rag-app/README.md`](RAG%20Assignment/my-rag-app/README.md)
+**📖 Full agent docs** (usage examples, parameters, optimization/testing writeup): [`RAG Assignment/README.md`](RAG%20Assignment/README.md)
 
 ## What it does
 
