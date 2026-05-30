@@ -1,0 +1,33 @@
+# === API Keys & Secrets ===
+.env
+.env.local
+.env.*
+*.env
+
+# === Claude Code internal ===
+.claude/
+
+# === Python ===
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.pdb
+.venv/
+venv/
+env/
+
+# === Node.js (legacy rag-app remnants) ===
+node_modules/
+.next/
+npm-debug.log*
+
+# === Large data files ===
+*.csv
+embeddings_local.json
+
+# === OS / IDE ===
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

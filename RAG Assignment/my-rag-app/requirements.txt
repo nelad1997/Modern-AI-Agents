@@ -1,0 +1,7 @@
+fastapi
+uvicorn
+langchain-openai
+langchain
+pinecone
+python-dotenv
+tiktoken
