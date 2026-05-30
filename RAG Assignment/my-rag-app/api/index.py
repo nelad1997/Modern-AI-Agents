@@ -1,13 +1,23 @@
+import json
 import os
 from dotenv import load_dotenv
 load_dotenv(dotenv_path=os.path.join(os.path.dirname(__file__), "..", ".env.local"))
 
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import Response
 from pydantic import BaseModel
 from langchain_openai import OpenAIEmbeddings, ChatOpenAI
 from langchain_core.messages import SystemMessage, HumanMessage
 from pinecone import Pinecone
+
+
+def json_response(data: dict) -> Response:
+    """Return JSON with ensure_ascii=True so Vercel's runtime never hits a codec error."""
+    return Response(
+        content=json.dumps(data, ensure_ascii=True),
+        media_type="application/json",
+    )
 
 app = FastAPI()
 
@@ -46,7 +56,7 @@ For all question types:
 
 TOP_K = 10
 CHUNK_SIZE = 512
-OVERLAP_RATIO = 0.15
+OVERLAP_RATIO = 0.20
 INDEX_NAME = os.getenv("PINECONE_INDEX_NAME", "medium-rag")
 
 
@@ -122,14 +132,14 @@ async def prompt(req: PromptRequest):
             HumanMessage(content=user_prompt),
         ])
 
-        return {
+        return json_response({
             "response": ai_response.content,
             "context": context,
             "Augmented_prompt": {
                 "System": SYSTEM_PROMPT,
                 "User": user_prompt,
             },
-        }
+        })
 
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
@@ -137,8 +147,8 @@ async def prompt(req: PromptRequest):
 
 @app.get("/api/stats")
 async def stats():
-    return {
+    return json_response({
         "chunk_size": CHUNK_SIZE,
         "overlap_ratio": OVERLAP_RATIO,
         "top_k": TOP_K,
-    }
+    })

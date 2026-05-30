@@ -21,7 +21,7 @@ from chunker import chunk_text
 CSV_PATH = Path(__file__).parent.parent / "medium-english-50mb.csv"
 INDEX_NAME = os.getenv("PINECONE_INDEX_NAME", "medium-rag")
 CHUNK_SIZE = 512
-OVERLAP_RATIO = 0.15
+OVERLAP_RATIO = 0.20
 EMBED_BATCH_SIZE = 256
 UPSERT_BATCH_SIZE = 100
 
