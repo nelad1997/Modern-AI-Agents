@@ -2,6 +2,9 @@
 
 A Retrieval-Augmented Generation (RAG) application built with Python/FastAPI, LangChain, Pinecone, and deployed on Vercel.
 
+**🌐 Live agent:** https://my-rag-app-eight.vercel.app
+**📖 Full agent docs** (usage examples, parameters, optimization/testing writeup): [`RAG Assignment/my-rag-app/README.md`](RAG%20Assignment/my-rag-app/README.md)
+
 ## What it does
 
 Answers questions about a dataset of ~7,600 Medium articles by:
@@ -18,7 +21,7 @@ RAG Assignment/
 │   ├── requirements.txt
 │   └── vercel.json
 └── scripts/             # Ingestion pipeline
-    ├── chunker.py       # Token-aware chunking (512 tokens, 15% overlap)
+    ├── chunker.py       # Token-aware chunking (512 tokens, 20% overlap)
     ├── ingest.py        # Embeds & upserts all articles to Pinecone
     ├── setup_pinecone.py
     └── validate_local.py
