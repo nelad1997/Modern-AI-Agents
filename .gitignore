@@ -28,6 +28,13 @@ npm-debug.log*
 # === Large data files ===
 *.csv
 embeddings_local.json
+articles_subset.json
+
+# === Local test/helper scripts (not part of the deployed app) ===
+build_subset.py
+clear_index.py
+local_test*.py
+test_*.py
 
 # === OS / IDE ===
 .DS_Store
