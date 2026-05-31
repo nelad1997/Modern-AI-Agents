@@ -113,46 +113,6 @@ Elon Musk about space exploration"* — so the agent does not hallucinate author
 
 ---
 
-## 🔬 Optimization & testing process
-
-The pipeline was validated in stages — cheap local validation first, then full production
-ingestion — to avoid burning embedding cost on bad parameters.
-
-### Stage 1 — Local validation & parameter selection on ~300 articles
-`scripts/validate_local.py` embeds the first **300 articles** and runs a **local cosine
-similarity** search (no Pinecone needed). Embeddings are cached to `embeddings_local.json`
-so re-runs are free. This stage was used to:
-- sanity-check chunking (`scripts/chunker.py`) and token counts,
-- compare `chunk_size` / `overlap_ratio` candidates and pick the values to ship,
-- confirm the 4 question types returned sensible top-k chunks,
-
-before committing to a full embed of the whole corpus.
-
-### Stage 2 — Full ingestion + hyperparameter comparison (~7,600 articles)
-Once the parameters looked good locally, `scripts/ingest.py` chunked and embedded the
-**entire dataset** and upserted it to the Pinecone `medium-rag` index in batches (embed
-batch 256, upsert batch 100). We then re-embedded the full corpus with a wider overlap
-(**0.15 → 0.20**) and compared retrieval head-to-head:
-
-| | overlap = 0.15 | overlap = 0.20 |
-|---|---|---|
-| Total vectors | 26,473 | 27,752 |
-| Q2 (education) max score | 0.386 | **0.428** |
-| Q3 (pandemics) rank of correct article | 8th | **6th** |
-| Per-article chunk coverage in top-10 | lower | **higher** |
-
-The wider **0.20** overlap surfaced an extra relevant education article, ranked the correct
-pandemics article higher, and gave richer per-article context — with no regressions across
-the 4 assignment questions. So `overlap_ratio = 0.20` was adopted as the final value.
-
-### Stage 3 — Behavioral / robustness testing
-Beyond the 4 assignment questions we ran edge-case "trap" questions (e.g. articles by Elon
-Musk / Malcolm Gladwell that do not exist in the corpus, a "climate change is a hoax"
-article) to confirm the agent **refuses** rather than fabricates. All refusals behaved
-correctly.
-
----
-
 ## 🛠️ Run locally
 
 ```bash
