@@ -18,9 +18,12 @@ from units_p4 import UNITS as UNITS_P4
 from units_p5 import UNITS as UNITS_P5
 from units_p6 import UNITS as UNITS_P6
 from units_p7 import UNITS as UNITS_P7
+from units_p8 import UNITS as UNITS_P8
+from units_p9 import UNITS as UNITS_P9
 
 ALL_UNITS = (list(UNITS_P1) + list(UNITS_P2) + list(UNITS_P3) + list(UNITS_P4)
-             + list(UNITS_P5) + list(UNITS_P6) + list(UNITS_P7))
+             + list(UNITS_P5) + list(UNITS_P6) + list(UNITS_P7)
+             + list(UNITS_P8) + list(UNITS_P9))
 
 HERE = os.path.dirname(__file__)
 SRC = os.path.join(HERE, "..", "history_bagrut_master_3.xlsx")
